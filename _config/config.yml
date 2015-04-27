@@ -1,0 +1,15 @@
+---
+Name: onesky-translation
+---
+OneSkyClient:
+  api_key: ''
+  secret_key: ''
+  project_id: 0
+  file_format: 'RUBY_YAML'
+  files_dir: 'mysite/lang'
+  base_language:
+    code: 'en'
+    file: 'en.yml'
+Date:
+  extensions:
+    - MemberDateFormat

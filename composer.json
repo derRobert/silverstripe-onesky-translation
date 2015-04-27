@@ -1,0 +1,23 @@
+{
+  "name": "derrobert/silverstripe-onesky-translation",
+  "description": "A module for SilverStripe which will handle the up and downloads of the lang ..yml files. It is using the API of OneSkyApp.com",
+  "type": "silverstripe-module",
+  "keywords": [
+    "silverstripe",
+    "oneskyapp",
+    "i18n"
+  ],
+  "homepage": "https://github.com/nglasl/silverstripe-misdirection",
+  "license": "BSD-3-Clause",
+  "authors": [{
+    "name": "Robert Schwandner",
+    "email": "rs@rob24.de"
+  }],
+  "require": {
+    "silverstripe/framework": "3.0.*",
+    "onesky/api-library-php5": "dev-master"
+  },
+  "extra": {
+    "installer-name": "onesky-translation"
+  }
+}
