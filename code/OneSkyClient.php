@@ -37,13 +37,11 @@ class OneSkyClient extends \Onesky\Api\Client {
             'locale'     => $locale_string,
             'source_file_name' => $cfg->base_language['file']
         ));
-        try {
+        if( is_writable($file_path) ) {
             file_put_contents($file_path, $response);
-        } catch (Exception $ex) {
-            return false;
+            return true;
         }
-        return true;
-
+        return false;
     }
 
     public function getLanguages() {

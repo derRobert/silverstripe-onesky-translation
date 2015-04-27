@@ -128,6 +128,17 @@ class OneSkyAdmin extends LeftAndMain implements PermissionProvider {
         //$gridField->addExtraClass('all-reports-gridfield');
         $fields->push($gridField);
 
+
+        $gridFieldConfig = GridFieldConfig::create()->addComponents(
+            new GridFieldToolbarHeader(),
+            new GridFieldSortableHeader(),
+            new GridFieldDataColumns(),
+            new GridFieldFooter()
+        );
+
+        $grid = new GridField('Logs', 'Logs', OneSkyLogEntry::get(), $gridFieldConfig);
+        $fields->push($grid);
+
         $actions = new FieldList(
 
         );

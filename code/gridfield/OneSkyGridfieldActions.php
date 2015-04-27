@@ -59,29 +59,33 @@ class OneSkyGridfieldActions implements GridField_ColumnProvider, GridField_Acti
             $response = $client->uploadBaseLanguageFile();
             if( $response && strpos((string)$response->meta->status, "2") == 0 ) { // responses of 2xx are succesful
                 Controller::curr()->getResponse()->setStatusCode(
-                    200,
+                    $rsp_code=200,
                     'Upload successful'
                 );
             } else {
                 Controller::curr()->getResponse()->setStatusCode(
-                    500,
+                    $rsp_code = 500,
                     'Oopps, could not upload file'
                 );
+
             }
+            $cfg = Config::inst()->forClass('OneSkyClient');
+            OneSkyLogEntry::log('upload', $cfg->base_language['code'], $rsp_code);
         } elseif( $actionName=="downloadlanguagefile" ) {
             $client = new OneSkyClient();
             $result = $client->downloadTranslationFile($arguments['code']);
             if( $result ) {
                 Controller::curr()->getResponse()->setStatusCode(
-                    200,
+                    $rsp_code = 200,
                     'Download successful'
                 );
             } else {
                 Controller::curr()->getResponse()->setStatusCode(
-                    500,
+                    $rsp_code = 500,
                     'Oopps, could not download file'
                 );
             }
+            OneSkyLogEntry::log('download', $arguments['code'], $rsp_code);
         }
     }
 }
