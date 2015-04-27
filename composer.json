@@ -14,7 +14,7 @@
     "email": "rs@rob24.de"
   }],
   "require": {
-    "silverstripe/framework": "3.0.*",
+    "silverstripe/framework": "~3.1",
     "onesky/api-library-php5": "dev-master"
   },
   "extra": {
