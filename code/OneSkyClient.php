@@ -52,7 +52,7 @@ class OneSkyClient extends \Onesky\Api\Client {
             'project_id' => Config::inst()->get('OneSkyClient', 'project_id')
         ));
         $result =  json_decode($response);
-        if( $result->meta->status == 200 ) {
+        if( $result && $result->meta->status == 200 ) {
             foreach( $result->data as $lang ) {
                 $ret->push( ArrayData::create(array(
                     "code" => $lang->code,
@@ -69,6 +69,25 @@ class OneSkyClient extends \Onesky\Api\Client {
             }
         }
         return $ret;
+    }
+
+    /**
+     * @return false|ArrayData
+     */
+    public function getProjectInfo() {
+        $response = $this->projects('show', array(
+            'project_id' => Config::inst()->get('OneSkyClient', 'project_id')
+        ));
+        $result =  json_decode($response);
+        if( $result && $result->meta->status == 200 ) {
+            return ArrayData::create(array(
+                'name' => $result->data->name,
+                'description' => $result->data->description,
+                'string_count' => $result->data->string_count,
+                'word_count' => $result->data->word_count,
+            ));
+        }
+        return false;
     }
 
 

@@ -21,10 +21,16 @@ class OneSkyAdmin extends LeftAndMain implements PermissionProvider {
      */
     protected $api = null;
 
+    /**
+     * @var null|false|ArrayData
+     */
+    protected $project_info=null;
+
 
     public function init() {
         parent::init();
         $this->api = new OneSkyClient();
+        $this->project_info = $this->api->getProjectInfo();
     }
 
 
@@ -68,6 +74,19 @@ class OneSkyAdmin extends LeftAndMain implements PermissionProvider {
     public function getEditForm($id = null, $fields = null) {
 
         $fields = FieldList::create();
+
+        if( $this->project_info ){
+            $fields->push(
+                HeaderField::create($this->project_info->name)
+            );
+            if( $this->project_info->description ) {
+                $fields->push(
+                    LiteralField::create( 'onesky_project_description', sprintf("<p><i>%s</i></p>", $this->project_info->description) )
+                );
+            }
+            $fields->push(LiteralField::create('onesky_string_count', "<p>Amount strings: {$this->project_info->string_count}</p>"));
+            $fields->push(LiteralField::create('onesky_word_count', "<p>Amount words: {$this->project_info->word_count}</p>"));
+        }
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
             new GridFieldToolbarHeader(),
