@@ -125,7 +125,6 @@ class OneSkyAdmin extends LeftAndMain implements PermissionProvider {
             }
         ));
 
-        //$gridField->addExtraClass('all-reports-gridfield');
         $fields->push($gridField);
 
 
@@ -144,12 +143,10 @@ class OneSkyAdmin extends LeftAndMain implements PermissionProvider {
         );
         $form = Form::create(
             $this, "EditForm", $fields, $actions
-        )->setHTMLID('Form_EditForm');
-        //$form->setResponseNegotiator($this->getResponseNegotiator());
-        //$form->addExtraClass('cms-edit-form cms-panel-padded center ' . $this->BaseCSSClasses());
+        )->setHTMLID('Form_EditForm_OneSkyAdmin');
         $form->loadDataFrom($this->request->getVars());
 
-        $this->extend('updateEditForm', $form);
+        $this->extend('updateOneSkyForm', $form);
 
         return $form;
     }
